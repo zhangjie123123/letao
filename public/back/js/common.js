@@ -14,3 +14,4 @@ $(document).ajaxStop(function () {
     },500);
 
 });
+
