@@ -94,7 +94,7 @@ ul{
 .lt_main{
     padding-left: 180px;
     height: 1000px;
-    background-color: pink;
+    /*background-color: pink;*/
     padding-top: 50px;
     transition: all 1s;
 }
@@ -122,4 +122,10 @@ ul{
     text-align: center;
     color: #fff;
     font-size: 20px;
+}
+
+.echarts_1,
+.echarts_2{
+    width: 48%;
+    height: 400px;
 }
