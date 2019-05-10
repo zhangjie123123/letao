@@ -37,5 +37,50 @@ $(function () {
             }
         });
     }
-
+//2.点击添加分类按钮，显示模态框
+    $("#addBtn").click(function () {
+        $("#addModal").modal("show");
+    });
+    //3.使用表单效验插件，实现表单效验
+    $("#form").bootstrapValidator({
+        //配置效验的图标
+        feedbackIcons:{
+            valid:'glyphicon glyphicon-ok',
+            invalid:'glyphicon glyphicon-remove',
+            validating:'glyphicon glyphicon-refresh'
+        },
+// 配置字段
+        fields:{
+            categoryName:{
+                validators:{
+                    notEmpty:{
+                        message:"一级分类不能为空"
+                    }
+                }
+            }
+        }
+    });
+    //4.注册表单效验成功事件，阻止默认的成功提交，通过ajax进行提交
+    $('#form').on("success.form.bv",function (e) {
+      e.preventDefault();
+        //通过ajax进行提交
+        $.ajax({
+            type:"post",
+            url:"/category/addTopCategory",
+            data:$("#form").serialize(),
+            dataType:"json",
+            success:function (info) {
+                if(info.success){
+                    //添加完成成功
+                    //关闭模态框
+                    $("#addModal").modal("hide");
+                    currentPage=1;
+                    //页面重新渲染
+                    render();
+                    //3.重置模态框
+                    $('#form').data("bootstrapValidator").resetForm(true);
+                }
+            }
+        })
+    });
 });
